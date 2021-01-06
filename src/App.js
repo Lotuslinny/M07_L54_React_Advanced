@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+// This code is just an example. It will not work without the dependency Randomcolor.
+import React, { useState, useEffect } from "react"
+import randomcolor from "randomcolor" // a dependency
 
 function App() {
+  const [count, setCount] = useState(0)
+  const [color, setColor] = useState("")
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      // setCount(prevCount => prevCount + 1)
+    }, 1000)
+    return () => clearInterval(intervalId)
+  }, [])
+
+  useEffect(() => {
+    setColor(randomcolor())
+  }, [count])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 style={{ color: color }}>{count}</h1>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
